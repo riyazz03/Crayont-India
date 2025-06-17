@@ -44,7 +44,7 @@ ${formData.message}
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-3xl font-bold text-gray-900">Let's Build Something Amazing</h3>
+          <h3 className="text-3xl font-bold text-gray-900">Let&apos;s Build Something Amazing</h3>
           <button 
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 text-3xl font-light"
@@ -133,7 +133,7 @@ ${formData.message}
               <option value="$10K - $25K">$10K - $25K</option>
               <option value="$25K - $50K">$25K - $50K</option>
               <option value="$50K+">$50K+</option>
-              <option value="Let's Discuss">Let's Discuss</option>
+              <option value="Let's Discuss">Let&apos;s Discuss</option>
             </select>
           </div>
           
@@ -160,7 +160,7 @@ ${formData.message}
         </form>
 
         <p className="text-sm text-gray-500 text-center mt-4">
-          We'll get back to you within 24 hours
+          We&apos;ll get back to you within 24 hours
         </p>
       </div>
     </div>

@@ -19,7 +19,7 @@ export default function ProjectGrid() {
             Our Recent Projects
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Discover how we've helped businesses transform their digital presence with innovative solutions
+            Discover how we&apos;ve helped businesses transform their digital presence with innovative solutions
           </p>
         </div>
 
