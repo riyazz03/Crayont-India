@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "E-commerce Platform",
+    "description": "Modern online store with secure payment integration and admin dashboard",
+    "image": "/projects/project1.jpg",
+    "technologies": ["Next.js", "React", "Stripe", "Tailwind"],
+    "category": "Web Development",
+    "link": "https://example.com",
+    "featured": true
+  },
+  {
+    "id": 2,
+    "title": "Startup Mobile App",
+    "description": "Cross-platform mobile application for food delivery startup",
+    "image": "/projects/project2.jpg",
+    "technologies": ["React Native", "Node.js", "MongoDB", "Firebase"],
+    "category": "Mobile App",
+    "link": "https://example.com",
+    "featured": true
+  },
+  {
+    "id": 3,
+    "title": "Corporate Website",
+    "description": "Professional business website with CMS and SEO optimization",
+    "image": "/projects/project3.jpg",
+    "technologies": ["Next.js", "Sanity CMS", "Vercel"],
+    "category": "Web Development",
+    "link": "https://example.com",
+    "featured": false
+  },
+  {
+    "id": 4,
+    "title": "SaaS Dashboard",
+    "description": "Analytics dashboard for B2B SaaS platform with real-time data",
+    "image": "/projects/project4.jpg",
+    "technologies": ["React", "D3.js", "PostgreSQL", "AWS"],
+    "category": "Web App",
+    "link": "https://example.com",
+    "featured": true
+  },
+  {
+    "id": 5,
+    "title": "Fintech Mobile App",
+    "description": "Secure banking application with biometric authentication",
+    "image": "/projects/project5.jpg",
+    "technologies": ["Flutter", "Firebase", "Blockchain"],
+    "category": "Mobile App",
+    "link": "https://example.com",
+    "featured": false
+  },
+  {
+    "id": 6,
+    "title": "AI-Powered Platform",
+    "description": "Machine learning platform for predictive analytics",
+    "image": "/projects/project6.jpg",
+    "technologies": ["Python", "TensorFlow", "React", "FastAPI"],
+    "category": "AI/ML",
+    "link": "https://example.com",
+    "featured": true
+  }
+]

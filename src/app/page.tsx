@@ -1,7 +1,24 @@
+"use client";
+import { useState } from 'react';
+import Navbar from '@/components/layouts/Navbar';
+import Hero from '@/components/sections/Hero';
+import ProjectGrid from '@/components/sections/ProjectGrid';
+import ContactForm from '@/components/sections/ContactForm';
+import Footer from '@/components/layouts/Footer';
+
 export default function Home() {
- return (
-   <div>
-     <h1>Crayont</h1>
-   </div>
- );
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-white">
+      <Navbar onContactClick={() => setIsContactFormOpen(true)} />
+      <Hero onContactClick={() => setIsContactFormOpen(true)} />
+      <ProjectGrid />
+      <ContactForm 
+        isOpen={isContactFormOpen} 
+        onClose={() => setIsContactFormOpen(false)} 
+      />
+      <Footer />
+    </div>
+  );
 }
