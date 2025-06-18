@@ -3,66 +3,75 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
-subsets: ["latin"],
-variable: "--font-inter",
-display: "swap",
+ subsets: ["latin"],
+ variable: "--font-inter",
+ display: "swap",
 });
 
 export const metadata: Metadata = {
-title: "Crayont - Premium Digital Agency | Web Development & Design Studio",
-description: "Crayont is a leading digital agency specializing in custom web development, UI/UX design, and digital solutions. Transform your business with our expert team.",
-keywords: "Crayont, Crayont India, digital agency, web development, UI UX design, custom websites, React development, Next.js development",
-authors: [{ name: "Crayont" }],
-creator: "Crayont",
-publisher: "Crayont India Private Limited",
-robots: "index, follow",
-openGraph: {
-  type: "website",
-  locale: "en_US",
-  url: "https://crayont.com",
-  siteName: "Crayont",
-  title: "Crayont - Premium Digital Agency | Web Development & Design",
-  description: "Transform your business with Crayont's expert web development and design services. Custom solutions for modern businesses.",
-  images: [
-    {
-      url: "/og-image.jpg",
-      width: 1200,
-      height: 630,
-      alt: "Crayont Digital Agency",
-    },
-  ],
-},
-alternates: {
-  canonical: "https://crayont.com",
-},
-icons: {
-  icon: [
-    { url: '/favicon/favicon.ico' },
-    { url: '/favicon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-    { url: '/favicon/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-  ],
-  apple: [
-    { url: '/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-  ],
-},
+ title: "Crayont - Modern Web & App Development | GSAP Animations, 3D Design & SaaS Products",
+ description: "Crayont builds cutting-edge websites and apps with advanced animations, 3D elements, and modern UI/UX. We specialize in Next.js, Flutter, React Native, GSAP animations, and SaaS product development.",
+ keywords: "Crayont, Crayont India, web development, app development, GSAP animations, 3D web design, Next.js development, Flutter apps, React Native, Webflow, Framer, SaaS products, modern web applications, UI UX design, end-to-end development",
+ authors: [{ name: "Crayont", url: "https://crayont.com" }, { name: "Riyaz Mohammed", url: "https://www.linkedin.com/in/mohammed--riyaz" }],
+ creator: "Crayont",
+ publisher: "Crayont India Private Limited",
+ robots: "index, follow",
+ openGraph: {
+   type: "website",
+   locale: "en_US",
+   url: "https://crayont.com",
+   siteName: "Crayont",
+   title: "Crayont - Modern Web & App Development | GSAP Animations & 3D Design",
+   description: "Build cutting-edge websites and apps with Crayont. We create modern web applications with advanced animations, 3D elements, and exceptional UI/UX using Next.js, Flutter, and GSAP.",
+   images: [
+     {
+       url: "/og-image.jpg",
+       width: 1200,
+       height: 630,
+       alt: "Crayont - Modern Web & App Development Agency",
+     },
+   ],
+ },
+ twitter: {
+   card: "summary_large_image",
+   site: "@CrayontOfficial",
+   creator: "@CrayontOfficial",
+   title: "Crayont - Modern Web & App Development | GSAP Animations & 3D Design",
+   description: "Build cutting-edge websites and apps with Crayont. We create modern web applications with advanced animations, 3D elements, and exceptional UI/UX.",
+   images: ["/og-image.jpg"],
+ },
+ alternates: {
+   canonical: "https://crayont.com",
+ },
+ other: {
+   "product-url": "https://myspace.crayont.com",
+   "social-instagram": "https://instagram.com/crayontofficial",
+   "social-linkedin": "https://linkedin.com/company/crayont-riyaz",
+   "founder-instagram": "https://instagram.com/md.riyazz_",
+   "founder-linkedin": "https://www.linkedin.com/in/mohammed--riyaz",
+ },
+ icons: {
+   icon: [
+     { url: '/favicon/favicon.ico' },
+     { url: '/favicon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+     { url: '/favicon/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+   ],
+   apple: [
+     { url: '/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+   ],
+ },
 };
 
 export default function RootLayout({
-children,
+ children,
 }: Readonly<{
-children: React.ReactNode;
+ children: React.ReactNode;
 }>) {
-return (
-  <html lang="en">
-    <head>
-      <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
-      <link rel="icon" href="/favicon/favicon-16x16.png" sizes="16x16" type="image/png" />
-      <link rel="icon" href="/favicon/favicon-32x32.png" sizes="32x32" type="image/png" />
-      <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
-    </head>
-    <body className={`${inter.variable} font-sans antialiased`}>
-      {children}
-    </body>
-  </html>
-);
+ return (
+   <html lang="en">
+     <body className={`${inter.variable} font-sans antialiased`}>
+       {children}
+     </body>
+   </html>
+ );
 }
