@@ -1,5 +1,7 @@
 "use client";
 import { useState } from 'react';
+import '../../styles/navbar.css';
+import Button from '../ui/button';
 
 interface NavbarProps {
   onContactClick: () => void;
@@ -9,43 +11,37 @@ export default function Navbar({ onContactClick }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-sm border-b sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
-            <img 
-              src="/favicon/favicon-32x32.png" 
-              alt="Crayont" 
-              className="h-8 w-8 mr-3"
+    <nav className="navbar">
+      <div className="navbar-container">
+        <div className="navbar-content">
+          <div className="logo-section">
+            <img
+              src="/svg/logo.svg"
+              alt="Crayont"
+              className="logo-img"
             />
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-green-400 bg-clip-text text-transparent">
-              Crayont
-            </span>
           </div>
 
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="#projects" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+          <div className="desktop-nav">
+            <a href="#projects" className="nav-link animated-link">
               Projects
             </a>
-            <a href="#services" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+            <a href="#services" className="nav-link">
               Services
             </a>
-            <a href="#about" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+            <a href="#about" className="nav-link">
               About
             </a>
-            <button
-              onClick={onContactClick}
-              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105"
-            >
+            <Button onClick={onContactClick}>
               Get in Touch
-            </button>
+            </Button>
           </div>
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-md text-gray-700 hover:text-blue-600"
+            className="mobile-menu-button"
           >
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               {isMenuOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               ) : (
@@ -56,23 +52,20 @@ export default function Navbar({ onContactClick }: NavbarProps) {
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden pb-4">
-            <div className="flex flex-col space-y-2">
-              <a href="#projects" className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium">
+          <div className="mobile-menu">
+            <div className="mobile-menu-content">
+              <a href="#projects" className="mobile-nav-link">
                 Projects
               </a>
-              <a href="#services" className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium">
+              <a href="#services" className="mobile-nav-link">
                 Services
               </a>
-              <a href="#about" className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium">
+              <a href="#about" className="mobile-nav-link">
                 About
               </a>
-              <button
-                onClick={onContactClick}
-                className="mt-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium text-left"
-              >
+              <Button onClick={onContactClick} className="mobile-button">
                 Get in Touch
-              </button>
+              </Button>
             </div>
           </div>
         )}

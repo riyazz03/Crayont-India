@@ -1,37 +1,118 @@
 "use client";
+import { Bebas_Neue } from 'next/font/google';
+import { useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
+import '../../styles/hero.css';
+
+const bebasNeue = Bebas_Neue({
+  weight: '400',
+  subsets: ['latin'],
+});
 
 interface HeroProps {
   onContactClick: () => void;
 }
 
 export default function Hero({ onContactClick }: HeroProps) {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const circleRef = useRef<HTMLDivElement>(null);
+  const arrowRef = useRef<SVGSVGElement>(null);
+
+  useEffect(() => {
+    const handleMouseEnter = (e: MouseEvent) => {
+      if (!circleRef.current || !buttonRef.current || !arrowRef.current) return;
+
+      const rect = buttonRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      gsap.killTweensOf([circleRef.current, arrowRef.current]);
+
+      gsap.set(circleRef.current, {
+        left: x,
+        top: y,
+        scale: 0,
+        opacity: 1
+      });
+
+      gsap.to(circleRef.current, {
+        scale: 1,
+        duration: 0.6,
+        ease: "power2.out"
+      });
+
+      gsap.to(arrowRef.current, {
+        rotation: -45,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    };
+
+    const handleMouseLeave = () => {
+      if (!circleRef.current || !arrowRef.current) return;
+
+      gsap.killTweensOf([circleRef.current, arrowRef.current]);
+
+      gsap.to(circleRef.current, {
+        scale: 0,
+        duration: 0.4,
+        ease: "power2.out"
+      });
+
+      gsap.to(arrowRef.current, {
+        rotation: 0,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    };
+
+    const button = buttonRef.current;
+    if (button) {
+      button.addEventListener('mouseenter', handleMouseEnter);
+      button.addEventListener('mouseleave', handleMouseLeave);
+      return () => {
+        button.removeEventListener('mouseenter', handleMouseEnter);
+        button.removeEventListener('mouseleave', handleMouseLeave);
+      };
+    }
+  }, []);
+
   return (
-    <section className="bg-gradient-to-br from-gray-50 to-blue-50 py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            We Build Digital
-            <span className="block bg-gradient-to-r from-blue-600 to-green-400 bg-clip-text text-transparent">
-              Experiences
+    <section className="hero-section">
+      <div className="hero-container">
+        <div className="hero-content">
+          <h1 className={`hero-title ${bebasNeue.className}`}>
+            Creativity without
+            <span className={`hero-title-highlight ${bebasNeue.className}`}>
+              compromise
             </span>
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Crayont transforms your ideas into powerful web applications, mobile apps, and digital solutions. 
-            From startups to enterprises, we craft scalable technology that drives growth.
+          <p className="hero-description">
+            We partner with forward-thinking companies to create digital products that drive results and deliver exceptional user experiences.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="hero-action">
             <button
+              ref={buttonRef}
               onClick={onContactClick}
-              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+              className="hero-button"
             >
-              Start Your Project
+              <div ref={circleRef} className="hero-button-circle" />
+              <span className="hero-button-text">Start Your Project</span>
+              <svg
+                ref={arrowRef}
+                className="hero-button-arrow"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
             </button>
-            <a
-              href="#projects"
-              className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
-            >
-              View Our Work
-            </a>
           </div>
         </div>
       </div>
