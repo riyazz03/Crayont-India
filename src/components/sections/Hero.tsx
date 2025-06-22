@@ -17,8 +17,75 @@ export default function Hero({ onContactClick }: HeroProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
   const arrowRef = useRef<SVGSVGElement>(null);
+  const titleRef = useRef<HTMLSpanElement>(null);
+  const highlightRef = useRef<HTMLSpanElement>(null);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
+  const buttonContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const splitText = (element: HTMLElement) => {
+      const text = element.textContent || '';
+      element.innerHTML = '';
+      
+      return text.split('').map((char, index) => {
+        const span = document.createElement('span');
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        span.style.display = 'inline-block';
+        span.style.transform = 'translateY(100px)';
+        span.style.opacity = '0';
+        span.className = bebasNeue.className;
+        span.style.fontFamily = 'inherit';
+        span.style.fontSize = 'inherit';
+        span.style.fontWeight = 'inherit';
+        span.style.lineHeight = 'inherit';
+        span.style.letterSpacing = 'inherit';
+        element.appendChild(span);
+        return span;
+      });
+    };
+
+    const initializeElements = () => {
+      if (!titleRef.current || !highlightRef.current || !descriptionRef.current || !buttonContainerRef.current) return;
+
+      gsap.set(descriptionRef.current, { opacity: 0, y: 20 });
+      gsap.set(buttonContainerRef.current, { opacity: 0, y: 20 });
+
+      const titleChars = splitText(titleRef.current);
+      const highlightChars = splitText(highlightRef.current);
+
+      const masterTimeline = gsap.timeline();
+
+      masterTimeline
+        .to(titleChars, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.04,
+          ease: "power2.out"
+        })
+        .to(highlightChars, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.04,
+          ease: "power2.out"
+        }, "-=0.6")
+        .to(descriptionRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out"
+        }, "-=0.4")
+        .to(buttonContainerRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out"
+        }, "-=0.6");
+    };
+
+    const timer = setTimeout(initializeElements, 100);
+
     const handleMouseEnter = (e: MouseEvent) => {
       if (!circleRef.current || !buttonRef.current || !arrowRef.current) return;
 
@@ -70,11 +137,15 @@ export default function Hero({ onContactClick }: HeroProps) {
     if (button) {
       button.addEventListener('mouseenter', handleMouseEnter);
       button.addEventListener('mouseleave', handleMouseLeave);
+      
       return () => {
+        clearTimeout(timer);
         button.removeEventListener('mouseenter', handleMouseEnter);
         button.removeEventListener('mouseleave', handleMouseLeave);
       };
     }
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -82,15 +153,19 @@ export default function Hero({ onContactClick }: HeroProps) {
       <div className="hero-container">
         <div className="hero-content">
           <h1 className={`hero-title ${bebasNeue.className}`}>
-            Creativity without
-            <span className={`hero-title-highlight ${bebasNeue.className}`}>
-              compromise
-            </span>
+            <div className="hero-title-line">
+              <span ref={titleRef} className={bebasNeue.className}>Creativity without</span>
+            </div>
+            <div className="hero-title-line">
+              <span ref={highlightRef} className={`hero-title-highlight ${bebasNeue.className}`}>
+                compromise
+              </span>
+            </div>
           </h1>
-          <p className="hero-description">
+          <p ref={descriptionRef} className="hero-description">
             We partner with forward-thinking companies to create digital products that drive results and deliver exceptional user experiences.
           </p>
-          <div className="hero-action">
+          <div ref={buttonContainerRef} className="hero-action">
             <button
               ref={buttonRef}
               onClick={onContactClick}

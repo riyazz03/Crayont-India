@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 
 interface ButtonProps {
@@ -12,8 +12,20 @@ export default function Button({ children, onClick, className = "" }: ButtonProp
   const buttonRef = useRef<HTMLButtonElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
   const arrowRef = useRef<SVGSVGElement>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
+    if (circleRef.current && arrowRef.current) {
+      gsap.set(circleRef.current, {
+        scale: 0,
+        opacity: 0
+      });
+      gsap.set(arrowRef.current, {
+        rotation: 0
+      });
+      setIsInitialized(true);
+    }
+
     const handleMouseEnter = (e: MouseEvent) => {
       if (!circleRef.current || !buttonRef.current || !arrowRef.current) return;
 
@@ -91,6 +103,7 @@ export default function Button({ children, onClick, className = "" }: ButtonProp
           align-items: center;
           gap: 8px;
           transition: border-color 0.2s ease;
+          opacity: ${isInitialized ? 1 : 0};
         }
 
         .custom-button:hover {
@@ -119,6 +132,7 @@ export default function Button({ children, onClick, className = "" }: ButtonProp
           z-index: 10;
           width: 16px;
           height: 16px;
+          transform: rotate(0deg);
         }
       `}</style>
       <button
