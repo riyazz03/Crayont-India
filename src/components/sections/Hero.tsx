@@ -26,8 +26,8 @@ export default function Hero({ onContactClick }: HeroProps) {
     const splitText = (element: HTMLElement) => {
       const text = element.textContent || '';
       element.innerHTML = '';
-      
-      return text.split('').map((char, index) => {
+
+      return text.split('').map((char) => { 
         const span = document.createElement('span');
         span.textContent = char === ' ' ? '\u00A0' : char;
         span.style.display = 'inline-block';
@@ -137,7 +137,7 @@ export default function Hero({ onContactClick }: HeroProps) {
     if (button) {
       button.addEventListener('mouseenter', handleMouseEnter);
       button.addEventListener('mouseleave', handleMouseLeave);
-      
+
       return () => {
         clearTimeout(timer);
         button.removeEventListener('mouseenter', handleMouseEnter);
