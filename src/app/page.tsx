@@ -10,7 +10,7 @@ export default function Home() {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-brand-black">
       <Navbar onContactClick={() => setIsContactFormOpen(true)} />
       <Hero onContactClick={() => setIsContactFormOpen(true)} />
       <ProjectGrid />

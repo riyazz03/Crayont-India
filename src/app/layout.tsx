@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Bebas_Neue } from 'next/font/google';
 import "./globals.css";
 import ClientLayout from "../components/layouts/ClientLayout";
+
+
+const bebasNeue = Bebas_Neue({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-bebas-neue',
+});
 
 const inter = Inter({
  subsets: ["latin"],
@@ -70,7 +78,7 @@ export default function RootLayout({
 }>) {
  return (
    <html lang="en">
-     <body className={`${inter.variable} font-sans antialiased`}>
+     <body className={`${inter.variable} ${bebasNeue.variable} font-sans antialiased`}>
        <ClientLayout>
          {children}
        </ClientLayout>
