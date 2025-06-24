@@ -28,17 +28,41 @@ body {
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
-* {
-  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-}
-
 h1,
 h2,
 h3,
 h4 {
   font-family: var(--font-bebas-neue);
 }
-
+.main-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.section-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.section-title {
+  font-size: 4rem;
+  color: var(--foreground);
+  text-align: center;
+  line-height: 100%;
+}
+.section-title span {
+  color: var(--brand-color-1);
+}
+.section-subtitle {
+  font-size: 1.25rem;
+  color: rgb(170, 170, 170);
+  max-width: 32rem;
+  margin: 0 auto;
+  text-align: center;
+}
 /* Link Animation Starts Here */
 .animated-link {
   position: relative;

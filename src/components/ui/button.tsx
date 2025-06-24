@@ -113,8 +113,8 @@ export default function Button({ children, onClick, className = "" }: ButtonProp
 
         .button-circle {
           position: absolute;
-          width: 300px;
-          height: 300px;
+          width: 350px;
+          height: 350px;
           background: var(--brand-color-1);
           border-radius: 50%;
           transform: translate(-50%, -50%) scale(0);

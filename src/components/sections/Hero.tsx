@@ -150,6 +150,8 @@ export default function Hero({ onContactClick }: HeroProps) {
 
   return (
     <section className="hero-section">
+    <div className="blue-overlay"></div>
+    <div className="green-overlay"></div>
       <div className="hero-container">
         <div className="hero-content">
           <h1 className={`hero-title ${bebasNeue.className}`}>
