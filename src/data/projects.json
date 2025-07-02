@@ -4,8 +4,15 @@
     "title": "Online Taleem Ul Quran",
     "description": "Modern online store with secure payment integration and admin dashboard",
     "image": "/projects/otuq.webp",
-    "technologies": ["Next.js", "GSAP", "Tailwind"],
-    "categories": ["Web Development", "UI/UX Design"],
+    "technologies": [
+      "Next.js",
+      "GSAP",
+      "Tailwind"
+    ],
+    "categories": [
+      "Web Development",
+      "UI/UX Design"
+    ],
     "link": "https://onlinetaleemulquran.com/",
     "featured": true
   },
@@ -14,8 +21,15 @@
     "title": "Archoeuvre",
     "description": "Cross-platform mobile application for food delivery startup",
     "image": "/projects/archoeuvre.webp",
-    "technologies": ["HTML", "CSS", "JavaScript"],
-    "categories": ["Web Development", "UI/UX Design"],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "categories": [
+      "Web Development",
+      "UI/UX Design"
+    ],
     "link": "https://archoeuvre.com/",
     "featured": true
   },
@@ -24,8 +38,16 @@
     "title": "Scripted Aesthetics",
     "description": "Professional business website with CMS and SEO optimization",
     "image": "/projects/sa.webp",
-    "technologies": ["HTML", "CSS", "JavaScript", "EJS"],
-    "categories": ["Web Development","UI/UX Design"],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "EJS"
+    ],
+    "categories": [
+      "Web Development",
+      "UI/UX Design"
+    ],
     "link": "https://www.scriptedaesthetics.com/",
     "featured": false
   },
@@ -34,8 +56,13 @@
     "title": "Advenga",
     "description": "Analytics dashboard for B2B SaaS platform with real-time data",
     "image": "/projects/advenza.webp",
-    "technologies": ["Flutter", "Firebase"],
-    "categories": ["Mobile App"],
+    "technologies": [
+      "Flutter",
+      "Firebase"
+    ],
+    "categories": [
+      "Mobile App"
+    ],
     "link": "",
     "featured": true
   },
@@ -44,8 +71,14 @@
     "title": "Link Buddy",
     "description": "Secure banking application with biometric authentication",
     "image": "/projects/linkbuddy.webp",
-    "technologies": ["Flutter", "Firebase"],
-    "categories": ["Mobile App", "UI/UX Design"],
+    "technologies": [
+      "Flutter",
+      "Firebase"
+    ],
+    "categories": [
+      "Mobile App",
+      "UI/UX Design"
+    ],
     "link": "",
     "featured": false
   },
@@ -54,28 +87,80 @@
     "title": "Tech Track",
     "description": "Machine learning platform for predictive analytics",
     "image": "/projects/techtrack.webp",
-    "technologies": ["Flutter", "Firebase"],
-    "categories": ["Mobile App"],
+    "technologies": [
+      "Flutter",
+      "Firebase"
+    ],
+    "categories": [
+      "Mobile App"
+    ],
     "link": "",
     "featured": true
   },
-   {
+  {
     "id": 7,
     "title": "Madrasa Rahmaniya",
     "description": "Machine learning platform for predictive analytics",
     "image": "/projects/madrasa.webp",
-    "technologies": ["Next Js", "Tailwind", "Razorpay"],
-    "categories": ["Web Development","UI/UX Design"],
-    "link": "https://arm-ni-enterprises.com/",
+    "technologies": [
+      "Next Js",
+      "Tailwind",
+      "Razorpay"
+    ],
+    "categories": [
+      "Web Development",
+      "UI/UX Design"
+    ],
+    "link": "https://madrasa-rahmaniya.vercel.app/",
     "featured": true
   },
   {
     "id": 8,
+    "title": "Sun Noodles",
+    "description": "Machine learning platform for predictive analytics",
+    "image": "/projects/sun.webp",
+    "technologies": [
+      "Figma",
+      "Adobe Illustrator"
+    ],
+    "categories": [
+      "Packaging"
+    ],
+    "link": "",
+    "featured": true
+  },
+  {
+    "id": 9,
+    "title": "Himalaya Offset",
+    "description": "Machine learning platform for predictive analytics",
+    "image": "/projects/himalaya.webp",
+    "technologies": [
+      "Next Js",
+      "Tailwind",
+      "Razorpay",
+      "Supabase"
+    ],
+    "categories": [
+      "Web Development",
+      "UI/UX Design"
+    ],
+    "link": "",
+    "featured": true
+  },
+  {
+    "id": 10,
     "title": "Arm NI Enterprises",
     "description": "Machine learning platform for predictive analytics",
     "image": "/projects/arm.webp",
-    "technologies": ["HTML", "CSS", "JavaScript"],
-    "categories": ["Web Development","UI/UX Design"],
+    "technologies": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "categories": [
+      "Web Development",
+      "UI/UX Design"
+    ],
     "link": "https://arm-ni-enterprises.com/",
     "featured": true
   }
