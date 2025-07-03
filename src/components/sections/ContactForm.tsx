@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from 'react';
 import '../../styles/contact-form.css';
 
 
-// Type for EmailJS window object
 declare global {
   interface Window {
     emailjs: {
