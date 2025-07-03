@@ -2,6 +2,17 @@
 import { useState, useEffect, useRef } from 'react';
 import '../../styles/contact-form.css';
 
+
+// Type for EmailJS window object
+declare global {
+  interface Window {
+    emailjs: {
+      init: (publicKey: string) => void;
+      send: (serviceId: string, templateId: string, params: Record<string, string>) => Promise<unknown>;
+    };
+  }
+}
+
 interface ContactFormProps {
   isOpen: boolean;
   onClose: () => void;
@@ -34,7 +45,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
     const script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
     script.onload = () => {
-      (window as any).emailjs.init('JFYJsVCly6UBLsnPP');
+      window.emailjs.init('JFYJsVCly6UBLsnPP');
       console.log('EmailJS initialized');
     };
     document.head.appendChild(script);
@@ -191,7 +202,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
 
       console.log('Template params:', templateParams);
 
-      const result = await (window as any).emailjs.send(
+      const result = await window.emailjs.send(
         'service_szyio5l',
         'template_h66dd3o',
         templateParams
@@ -239,7 +250,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
       >
         <div className="contact-form-content">
           <div className="contact-form-header">
-            <h3 className="contact-form-title">Let's Build Something Amazing</h3>
+            <h3 className="contact-form-title">Let&apos;s Build Something Amazing</h3>
             <button
               onClick={handleClose}
               className="contact-form-close"
@@ -252,7 +263,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
           {submitStatus === 'success' && (
             <div className="success-message">
               <p className="success-message-title">Message sent successfully!</p>
-              <p className="success-message-text">We'll get back to you within 24 hours.</p>
+              <p className="success-message-text">We&apos;ll get back to you within 24 hours.</p>
             </div>
           )}
 
@@ -350,7 +361,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
                 <option value="₹3L - ₹8L">₹3L - ₹8L</option>
                 <option value="₹8L - ₹20L">₹8L - ₹20L</option>
                 <option value="₹20L+">₹20L+</option>
-                <option value="Let's Discuss">Let's Discuss</option>
+                <option value="Let&apos;s Discuss">Let&apos;s Discuss</option>
               </select>
             </div>
 
@@ -380,7 +391,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
           </form>
 
           <p className="footer-text">
-            We'll get back to you within 24 hours
+            We&apos;ll get back to you within 24 hours
           </p>
         </div>
       </div>
