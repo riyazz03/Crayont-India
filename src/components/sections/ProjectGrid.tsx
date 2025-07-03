@@ -1,8 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from 'react';
-import './ContactForm.css';
+import '../../styles/project-grid.css';
 
-// Type for EmailJS window object
 declare global {
   interface Window {
     emailjs: {
