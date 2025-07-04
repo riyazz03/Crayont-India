@@ -10,7 +10,6 @@ interface ClientLayoutProps {
 export default function ClientLayout({ children }: ClientLayoutProps) {
   const [showSplash, setShowSplash] = useState(true);
   const [mounted, setMounted] = useState(false);
-  const [isReady, setIsReady] = useState(false);
   const [fadeIn, setFadeIn] = useState(false);
 
   useEffect(() => {
@@ -21,7 +20,6 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     console.log('Splash completed'); 
     setShowSplash(false);
     
-    setIsReady(true);
     setTimeout(() => {
       setFadeIn(true);
       console.log('Fade in triggered');
