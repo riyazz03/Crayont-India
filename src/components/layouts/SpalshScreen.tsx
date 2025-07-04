@@ -75,6 +75,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
       
       <span ref={percentageRef} className="percentage-text">
         {percentage}
+        <span className="percentage-symbol">%</span>
       </span>
      
       <div className="progress-container">
