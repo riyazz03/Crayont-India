@@ -84,7 +84,7 @@ export default function Hero({ onContactClick }: HeroProps) {
         }, "-=0.6");
     };
 
-    const timer = setTimeout(initializeElements, 100);
+    initializeElements();
 
     const handleMouseEnter = (e: MouseEvent) => {
       if (!circleRef.current || !buttonRef.current || !arrowRef.current) return;
@@ -139,13 +139,10 @@ export default function Hero({ onContactClick }: HeroProps) {
       button.addEventListener('mouseleave', handleMouseLeave);
 
       return () => {
-        clearTimeout(timer);
         button.removeEventListener('mouseenter', handleMouseEnter);
         button.removeEventListener('mouseleave', handleMouseLeave);
       };
     }
-
-    return () => clearTimeout(timer);
   }, []);
 
   return (

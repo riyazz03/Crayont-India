@@ -1,0 +1,160 @@
+.splash-container {
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100vw;
+ height: 100vh;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ z-index: 9999;
+ overflow: hidden;
+ background: var(--brand-color-1);
+ transition: all 2s cubic-bezier(0.77, 0, 0.175, 1);
+ font-family: 'Bebas Neue', 'Arial Black', sans-serif;
+}
+
+.glow-effect {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ width: 300px;
+ height: 300px;
+ transform: translate(-50%, -50%);
+ background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
+ border-radius: 50%;
+ opacity: 0;
+ animation: pulse 2s ease-in-out infinite;
+ transition: opacity 1s ease-out;
+}
+
+.percentage-text {
+ position: absolute;
+ bottom: 80px;
+ left: 60px;
+ font-size: 12rem;
+ font-weight: 200;
+ color: #ffffff;
+ letter-spacing: 0.05em;
+ transition: opacity 1s ease-out;
+ text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.percentage-symbol {
+ font-size: 0.6em;
+ opacity: 0.8;
+ margin-left: 0.1em;
+}
+
+.progress-container {
+ position: absolute;
+ top: 50%;
+ left: 0;
+ width: 100vw;
+ height: 4px;
+ transition: opacity 0.8s ease-out;
+}
+
+.progress-track {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ backdrop-filter: blur(10px);
+}
+
+.progress-line {
+ position: relative;
+ height: 100%;
+ background: linear-gradient(90deg, #ffffff, #e0e0e0, #ffffff);
+ width: 0%;
+ transition: width 0.1s linear;
+ box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+ overflow: hidden;
+}
+
+.progress-shine {
+ position: absolute;
+ top: 0;
+ left: -100%;
+ width: 100%;
+ height: 100%;
+ background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+ animation: shine 2s ease-in-out infinite;
+}
+
+.loading-text {
+ position: absolute;
+ bottom: 30px;
+ left: 50%;
+ transform: translateX(-50%);
+ font-size: 1.4rem;
+ font-weight: 300;
+ color: rgba(255, 255, 255, 0.85);
+ letter-spacing: 0.3em;
+ transition: opacity 1s ease-out;
+ text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes pulse {
+ 0%, 100% { 
+   transform: translate(-50%, -50%) scale(1);
+   opacity: 0.3;
+ }
+ 50% { 
+   transform: translate(-50%, -50%) scale(1.1);
+   opacity: 0.5;
+ }
+}
+
+@keyframes shine {
+ 0% { left: -100%; }
+ 100% { left: 100%; }
+}
+
+@media (max-width: 768px) {
+ .percentage-text {
+   font-size: 8rem;
+   bottom: 60px;
+   left: 40px;
+ }
+
+ .progress-container {
+   height: 3px;
+ }
+
+ .glow-effect {
+   width: 200px;
+   height: 200px;
+ }
+
+ .loading-text {
+   font-size: 1.2rem;
+   bottom: 25px;
+ }
+}
+
+@media (max-width: 480px) {
+ .percentage-text {
+   font-size: 5rem;
+   bottom: 50px;
+   left: 30px;
+ }
+
+ .loading-text {
+   font-size: 1rem;
+ }
+}
+
+@media (max-width: 320px) {
+ .percentage-text {
+   font-size: 4rem;
+   bottom: 40px;
+   left: 20px;
+ }
+
+ .loading-text {
+   font-size: 0.9rem;
+ }
+}
