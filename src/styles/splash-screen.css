@@ -94,7 +94,6 @@
  color: rgba(255, 255, 255, 0.85);
  letter-spacing: 0.3em;
  transition: opacity 1s ease-out;
- text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 @keyframes pulse {

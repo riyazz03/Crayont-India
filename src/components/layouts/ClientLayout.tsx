@@ -1,19 +1,24 @@
 "use client";
 import { useState, useEffect } from 'react';
-import SplashScreen from '../layouts/SpalshScreen';
+import dynamic from 'next/dynamic';
 import ScrollSmootherWrapper from '../layouts/ScrollSmoother';
+
+const SplashScreen = dynamic(() => import('../layouts/SpalshScreen'), {
+  ssr: false
+});
 
 interface ClientLayoutProps {
   children: React.ReactNode;
 }
 
 export default function ClientLayout({ children }: ClientLayoutProps) {
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [fadeIn, setFadeIn] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    setShowSplash(true);
   }, []);
 
   const handleSplashComplete = () => {
@@ -27,7 +32,15 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   };
 
   if (!mounted) {
-    return null;
+    return (
+      <div style={{ minHeight: '100vh', width: '100%' }}>
+        <ScrollSmootherWrapper>
+          <div style={{ minHeight: '100vh' }}>
+            {children}
+          </div>
+        </ScrollSmootherWrapper>
+      </div>
+    );
   }
 
   if (showSplash) {
@@ -39,11 +52,15 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       style={{ 
         opacity: fadeIn ? 1 : 0,
         transition: 'opacity 0.8s ease-out',
-        willChange: 'opacity'
+        willChange: 'opacity',
+        position: 'relative',
+        width: '100%'
       }}
     >
       <ScrollSmootherWrapper>
-        {children}
+        <div style={{ minHeight: '100vh' }}>
+          {children}
+        </div>
       </ScrollSmootherWrapper>
     </div>
   );
