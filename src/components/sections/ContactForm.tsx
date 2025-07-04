@@ -45,7 +45,6 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
     script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
     script.onload = () => {
       window.emailjs.init('JFYJsVCly6UBLsnPP');
-      console.log('EmailJS initialized');
     };
     document.head.appendChild(script);
 
@@ -199,7 +198,6 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
         })
       };
 
-      console.log('Template params:', templateParams);
 
       const result = await window.emailjs.send(
         'service_szyio5l',
@@ -207,14 +205,12 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
         templateParams
       );
 
-      console.log('Success:', result);
       setSubmitStatus('success');
       setTimeout(() => {
         handleClose();
       }, 2000);
 
     } catch (error) {
-      console.error('Error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);

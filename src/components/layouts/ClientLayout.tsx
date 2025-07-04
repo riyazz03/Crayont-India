@@ -17,12 +17,10 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   }, []);
 
   const handleSplashComplete = () => {
-    console.log('Splash completed'); 
     setShowSplash(false);
     
     setTimeout(() => {
       setFadeIn(true);
-      console.log('Fade in triggered');
     }, 100);
   };
 
