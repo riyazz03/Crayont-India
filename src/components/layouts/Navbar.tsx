@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import Image from 'next/image';
 import '../../styles/navbar.css';
 import Button from '../ui/button';
 
@@ -15,10 +16,13 @@ export default function Navbar({ onContactClick }: NavbarProps) {
       <div className="navbar-container">
         <div className="navbar-content">
           <div className="logo-section">
-            <img
+            <Image
               src="/svg/logo.svg"
               alt="Crayont"
               className="logo-img"
+              width={120}
+              height={40}
+              priority
             />
           </div>
 

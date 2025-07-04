@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import Image from 'next/image';
 import projectsData from '../../data/projects.json';
 import '../../styles/project-grid.css';
 
@@ -40,10 +41,17 @@ export default function ProjectGrid() {
           {filteredProjects.map((project) => (
             <div key={project.id} className="project-card">
               <div className="card-image">
-                <img
+                <Image
                   src={`${project.image}`}
                   alt={project.title}
                   className="card-image-img"
+                  width={400}
+                  height={250}
+                  style={{
+                    objectFit: 'cover',
+                    width: '100%',
+                    height: 'auto'
+                  }}
                 />
               </div>
 
