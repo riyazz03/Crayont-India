@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef } from 'react';
 import '../../styles/contact-form.css';
 
-
 declare global {
   interface Window {
     emailjs: {
@@ -64,7 +63,6 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
         const viewportWidth = window.innerWidth;
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        // Using inline styles for GSAP positioning
         if (overlayRef.current) {
           overlayRef.current.style.opacity = '0';
           overlayRef.current.style.position = 'absolute';
@@ -80,7 +78,6 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
           formRef.current.style.opacity = '0';
         }
 
-        // Animate in
         setTimeout(() => {
           if (overlayRef.current) {
             overlayRef.current.style.transition = 'opacity 0.3s ease-out';
@@ -198,8 +195,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
         })
       };
 
-
-      const result = await window.emailjs.send(
+      await window.emailjs.send(
         'service_szyio5l',
         'template_h66dd3o',
         templateParams
@@ -210,7 +206,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
         handleClose();
       }, 2000);
 
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
