@@ -38,11 +38,8 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     <div 
       style={{ 
         opacity: fadeIn ? 1 : 0,
-        transform: fadeIn ? 'translateY(0)' : 'translateY(0px)',
-        transition: 'opacity 0.8s ease-out, transform 0.6s ease-out',
-        willChange: 'opacity, transform',
-        minHeight: '100vh',
-        width: '100%'
+        transition: 'opacity 0.8s ease-out',
+        willChange: 'opacity'
       }}
     >
       <ScrollSmootherWrapper>
