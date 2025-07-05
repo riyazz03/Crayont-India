@@ -40,13 +40,22 @@ const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
   const heroSectionRef = useRef<HTMLElement>(null);
 
   const [dimensions, setDimensions] = useState<Dimensions>({ width: 0, height: 0 });
+  const [isMounted, setIsMounted] = useState<boolean>(false);
 
   // Grid configuration
   const GRID_SIZE: number = 20;
   const CURSOR_RADIUS: number = 120;
   const ANIMATION_SPEED: number = 0.1;
 
+  // Initial mount effect
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Handle resize and initial setup
+  useEffect(() => {
+    if (!isMounted) return;
+
     const handleResize = (): void => {
       if (heroSectionRef.current) {
         const rect = heroSectionRef.current.getBoundingClientRect();
@@ -54,11 +63,14 @@ const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
       }
     };
 
+    // Initial setup
     handleResize();
     window.addEventListener('resize', handleResize);
 
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMounted]);
 
   // Canvas grid animation
   useEffect(() => {
@@ -76,13 +88,13 @@ const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
     const cols: number = Math.ceil(dimensions.width / GRID_SIZE);
     const rows: number = Math.ceil(dimensions.height / GRID_SIZE);
     
-    // Grid state
+    // Grid state - start completely invisible
     const grid: GridCell[][] = [];
     for (let i = 0; i < rows; i++) {
       grid[i] = [];
       for (let j = 0; j < cols; j++) {
         grid[i][j] = { 
-          opacity: 0, 
+          opacity: 0, // Start invisible
           targetOpacity: 0,
           scale: 1,
           targetScale: 1,
@@ -138,18 +150,24 @@ const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
 
           // Draw cell if visible
           if (grid[i][j].opacity > 0.01) {
-            const cellSize: number = (GRID_SIZE - 4) * grid[i][j].scale; // Smaller cells with gaps
+            const cellSize: number = (GRID_SIZE - 4) * grid[i][j].scale;
             const x: number = j * GRID_SIZE + GRID_SIZE / 2 - cellSize / 2;
             const y: number = i * GRID_SIZE + GRID_SIZE / 2 - cellSize / 2;
 
-            // Draw border box with your brand color
-            ctx.strokeStyle = `rgba(0, 119, 255, ${grid[i][j].opacity})`;
+            // Create linear gradient for the stroke
+            const gradient = ctx.createLinearGradient(x, y, x + cellSize, y + cellSize);
+            gradient.addColorStop(0, `rgba(0, 119, 255, ${grid[i][j].opacity})`);
+            gradient.addColorStop(0.5, `rgba(0, 119, 255, ${grid[i][j].opacity * 0.8})`);
+            gradient.addColorStop(1, `rgba(0, 119, 255, ${grid[i][j].opacity * 0.6})`);
+
+            // Draw square box border
+            ctx.strokeStyle = gradient;
             ctx.lineWidth = 1.5;
             ctx.strokeRect(x, y, cellSize, cellSize);
 
             // Add subtle glow
             ctx.shadowColor = 'rgba(0, 119, 255, 0.3)';
-            ctx.shadowBlur = 8 * grid[i][j].scale;
+            ctx.shadowBlur = 6 * grid[i][j].scale;
             ctx.strokeRect(x, y, cellSize, cellSize);
             ctx.shadowBlur = 0;
           }
@@ -159,10 +177,10 @@ const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
       animationId = requestAnimationFrame(animate);
     };
 
-    // Start animation
+    // Start animation immediately
     animate();
 
-    // Event listeners
+    // Add event listeners immediately
     const heroElement = heroSectionRef.current;
     if (heroElement) {
       heroElement.addEventListener('mousemove', handleMouseMove);
@@ -178,8 +196,10 @@ const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
     };
   }, [dimensions, GRID_SIZE, CURSOR_RADIUS, ANIMATION_SPEED]);
 
-  // Text animation
+  // Text animation - starts immediately
   useEffect(() => {
+    if (!isMounted) return;
+
     const splitText = (element: HTMLElement): HTMLSpanElement[] => {
       const text: string = element.textContent || '';
       element.innerHTML = '';
@@ -210,6 +230,7 @@ const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
       const titleChars: HTMLSpanElement[] = splitText(titleRef.current);
       const highlightChars: HTMLSpanElement[] = splitText(highlightRef.current);
 
+      // Start immediately with no delay
       const masterTimeline = gsap.timeline();
 
       masterTimeline
@@ -241,12 +262,14 @@ const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
         }, "-=0.6");
     };
 
-    const timer: NodeJS.Timeout = setTimeout(initializeElements, 100);
-    return () => clearTimeout(timer);
-  }, []);
+    // Start immediately
+    initializeElements();
+  }, [isMounted]);
 
   // Button hover effects
   useEffect(() => {
+    if (!isMounted) return;
+
     const handleMouseEnter = (e: MouseEvent): void => {
       if (!circleRef.current || !buttonRef.current || !arrowRef.current) return;
 
@@ -304,11 +327,63 @@ const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
         button.removeEventListener('mouseleave', handleMouseLeave);
       };
     }
-  }, []);
+  }, [isMounted]);
+
+  // Don't render canvas until mounted
+  if (!isMounted) {
+    return (
+      <section ref={heroSectionRef} className="hero-section">
+        
+        <div className="hero-container">
+          <div className="hero-content">
+            <h1 className={`hero-title ${bebasNeue.className}`}>
+              <div className="hero-title-line">
+                <span ref={titleRef} className={bebasNeue.className}>Creativity without</span>
+              </div>
+              <div className="hero-title-line">
+                <span ref={highlightRef} className={`hero-title-highlight ${bebasNeue.className}`}>
+                  compromise
+                </span>
+              </div>
+            </h1>
+            <p ref={descriptionRef} className="hero-description">
+              We partner with forward-thinking companies to create digital products that drive results and deliver exceptional user experiences.
+            </p>
+            <div ref={buttonContainerRef} className="hero-action">
+              <button
+                ref={buttonRef}
+                onClick={onContactClick}
+                className="hero-button"
+              >
+                <div ref={circleRef} className="hero-button-circle" />
+                <span className="hero-button-text">Start Your Project</span>
+                <svg
+                  ref={arrowRef}
+                  className="hero-button-arrow"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section ref={heroSectionRef} className="hero-section">
       <div className="line-hero"></div>
+      <div className="is-right-line"></div>
+      
       {/* Canvas Grid Background */}
       <canvas
         ref={canvasRef}

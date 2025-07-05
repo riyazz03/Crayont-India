@@ -21,7 +21,7 @@ export default function ScrollSmootherWrapper({ children }: ScrollSmootherWrappe
       smoother = ScrollSmoother.create({
         wrapper: smoothWrapperRef.current,
         content: smoothContentRef.current,
-        smooth: 1.5,
+        smooth: 1,
         effects: true,
         smoothTouch: 0.1,
       });
