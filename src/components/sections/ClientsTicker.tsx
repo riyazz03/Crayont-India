@@ -29,33 +29,61 @@ const ClientsTicker: React.FC = () => {
         const ticker = tickerRef.current;
         const container = containerRef.current;
 
-        // Reset position to prevent initial glitch
-        gsap.set(ticker, { x: 0 });
-
-        // Calculate the width of one set of logos
-        const logoElements = ticker.querySelectorAll('.clients-ticker__logo');
-        const singleSetWidth = Array.from(logoElements).slice(0, clientLogos.length).reduce((total, element) => {
-            return total + element.getBoundingClientRect().width;
-        }, 0);
-
-        // Add gap calculations
-        const gap = 50; // Should match your CSS gap
-        const totalWidth = singleSetWidth + (gap * clientLogos.length);
-
-        // Create the infinite scroll animation with seamless loop
-        animationRef.current = gsap.timeline({
-            repeat: -1,
-            ease: 'none'
-        });
-
-        animationRef.current.fromTo(ticker,
-            { x: 0 },
-            {
-                x: -totalWidth,
-                duration: 25, // Slightly slower for smoother animation
-                ease: 'none'
+        // Wait for images to load and get accurate measurements
+        const setupAnimation = () => {
+            // Get all logo elements
+            const logoElements = ticker.querySelectorAll('.clients-ticker__logo');
+            
+            // Calculate the total width of one complete set (first half of logos)
+            const firstSetLogos = Array.from(logoElements).slice(0, clientLogos.length);
+            
+            // Force a layout recalculation to get accurate measurements
+            ticker.style.display = 'flex';
+            
+            // Calculate total width including gaps
+            const logoWidth = firstSetLogos.reduce((total, element) => {
+                const rect = element.getBoundingClientRect();
+                return total + rect.width;
+            }, 0);
+            
+            // Get computed gap from CSS
+            const computedStyle = window.getComputedStyle(ticker);
+            const gap = parseInt(computedStyle.gap) || 50;
+            
+            // Total width of one set including gaps
+            const singleSetWidth = logoWidth + (gap * (clientLogos.length - 1));
+            
+            // Kill any existing animation
+            if (animationRef.current) {
+                animationRef.current.kill();
             }
-        );
+            
+            // Reset position
+            gsap.set(ticker, { x: 0 });
+
+            // Create the infinite scroll animation
+            animationRef.current = gsap.timeline({
+                repeat: -1,
+                ease: 'none'
+            });
+
+            // Animate from 0 to exactly -singleSetWidth for seamless loop
+            animationRef.current.to(ticker, {
+                x: -singleSetWidth,
+                duration: 20, // Adjust speed as needed
+                ease: 'none'
+            });
+        };
+
+        // Setup animation after a short delay to ensure images are loaded
+        const timeoutId = setTimeout(setupAnimation, 100);
+
+        // Also listen for window resize to recalculate
+        const handleResize = () => {
+            setTimeout(setupAnimation, 100);
+        };
+
+        window.addEventListener('resize', handleResize);
 
         // Pause/resume on hover
         const handleMouseEnter = () => {
@@ -74,6 +102,8 @@ const ClientsTicker: React.FC = () => {
         container.addEventListener('mouseleave', handleMouseLeave);
 
         return () => {
+            clearTimeout(timeoutId);
+            window.removeEventListener('resize', handleResize);
             container.removeEventListener('mouseenter', handleMouseEnter);
             container.removeEventListener('mouseleave', handleMouseLeave);
             if (animationRef.current) {
@@ -88,7 +118,7 @@ const ClientsTicker: React.FC = () => {
                 <h2 className="clients-ticker__heading">Our Trusted Clients</h2>
 
                 <p className='clients-ticker__description'>
-                    We specialize in custom website development and mobile app development, delivering high-quality digital solutions tailored to each brand's unique needs. With 24/7 customer support, a collaborative process, and a strong focus on client satisfaction, we've built lasting relationships with businesses across industries. The logos below represent some of the trusted clients who have partnered with us to bring their digital visions to life.
+                    We specialize in custom website development and mobile app development, delivering high-quality digital solutions tailored to each brand&apos;s unique needs. With 24/7 customer support, a collaborative process, and a strong focus on client satisfaction, we&apos;ve built lasting relationships with businesses across industries. The logos below represent some of the trusted clients who have partnered with us to bring their digital visions to life.
                 </p>
 
                 <div className="clients-ticker__ticker-container" ref={containerRef}>
