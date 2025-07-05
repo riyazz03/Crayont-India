@@ -1,0 +1,135 @@
+.clients-ticker {
+  background-color: var(--brand-color-1);
+  color: white;
+  padding: 80px 0;
+  overflow: hidden;
+  position: relative;
+}
+.gradient-black {
+    background-image: linear-gradient(#000, #0000);
+    width: 100%;
+    position: absolute;
+    top: 0;
+    height: 60%;
+}
+.is-bottom{
+    top: auto;
+    bottom: 0;
+    transform: rotate(180deg);
+}
+.clients-ticker__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.clients-ticker__heading {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.clients-ticker__ticker-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.clients-ticker__ticker {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  height: 100%;
+  will-change: transform;
+}
+
+.clients-ticker__logo {
+  flex-shrink: 0;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.clients-ticker__logo:hover {
+  transform: scale(1.1);
+}
+
+.clients-ticker__logo-img {
+  height: 100%;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  transition: all 0.3s ease;
+}
+
+.clients-ticker__logo:hover .clients-ticker__logo-img {
+  filter: none;
+}
+
+.clients-ticker__gradient {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 150px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .clients-ticker {
+    padding: 80px 0;
+  }
+
+  .clients-ticker__heading {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+
+  .clients-ticker__ticker-container {
+    height: 100px;
+  }
+
+  .clients-ticker__logo {
+    height: 70px;
+    gap: 60px;
+  }
+
+  .clients-ticker__logo-img {
+    max-width: 100px;
+  }
+
+  .clients-ticker__gradient {
+    width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .clients-ticker__heading {
+    font-size: 1.5rem;
+  }
+
+  .clients-ticker__ticker {
+    gap: 40px;
+  }
+
+  .clients-ticker__logo {
+    height: 50px;
+  }
+
+  .clients-ticker__logo-img {
+    max-width: 80px;
+  }
+}
