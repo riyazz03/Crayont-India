@@ -16,7 +16,6 @@ export default function Navbar({ onContactClick }: NavbarProps) {
   const mobileButtonRef = useRef<HTMLButtonElement>(null);
   const mobileCircleRef = useRef<HTMLDivElement>(null);
   const mobileArrowRef = useRef<SVGSVGElement>(null);
-  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     if (circleRef.current && arrowRef.current) {
@@ -27,7 +26,6 @@ export default function Navbar({ onContactClick }: NavbarProps) {
       gsap.set(arrowRef.current, {
         rotation: 0
       });
-      setIsInitialized(true);
     }
 
     if (mobileCircleRef.current && mobileArrowRef.current) {

@@ -183,3 +183,13 @@
     filter: blur(30vw);
   }
 }
+
+
+.line-hero{
+  width: 2px;
+  height: 100%;
+  background: var(--brand-color-1);
+  position: absolute;
+  top: 0;
+  left: 20vw;
+}
