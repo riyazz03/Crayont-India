@@ -184,12 +184,14 @@
   }
 }
 
-
-.line-hero{
+.line-hero {
   width: 2px;
   height: 100%;
-  background: var(--brand-color-1);
+  backdrop-filter: blur(1.2vw);
+  background: #95cdff1a;
+  border: 0.1vw solid #95cdff33;
   position: absolute;
   top: 0;
   left: 20vw;
+  display: none;
 }
