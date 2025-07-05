@@ -7,15 +7,15 @@ import '../../styles/clients-ticker.css'; // Adjust the path as necessary
 
 // Client logos data - updated with your actual logo paths
 const clientLogos = [
-    { id: 1, name: 'Advenza', logo: '/ticker_logos/advenza.png' },
-    { id: 2, name: 'Archoeuvre', logo: '/ticker_logos/archoeuvre.png' },
-    { id: 3, name: 'Arm Ni Enterprises', logo: '/ticker_logos/arm-ni-enterprises.png' },
-    { id: 4, name: 'Himalaya Offset', logo: '/ticker_logos/himalaya-offset.png' },
-    { id: 5, name: 'Madrasa Rahmania Quasimul Uloom', logo: '/ticker_logos/madrasa.png' },
-    { id: 6, name: 'Ohmix', logo: '/ticker_logos/ohmix.png' },
-    { id: 7, name: 'Online Taleem ul Quran', logo: '/ticker_logos/online-taleem-ul-quran.png' },
-    { id: 8, name: 'SA', logo: '/ticker_logos/sa.png' },
-    { id: 9, name: 'TechTrack', logo: '/ticker_logos/techtrack.png' },
+    { id: 1, name: 'Advenza', logo: '/ticker_logos/advenza.webp' },
+    { id: 2, name: 'Archoeuvre', logo: '/ticker_logos/archoeuvre.webp' },
+    { id: 3, name: 'Arm Ni Enterprises', logo: '/ticker_logos/arm-ni-enterprises.webp' },
+    { id: 4, name: 'Himalaya Offset', logo: '/ticker_logos/himalaya-offset.webp' },
+    { id: 5, name: 'Madrasa Rahmania Quasimul Uloom', logo: '/ticker_logos/madrasa.webp' },
+    { id: 6, name: 'Ohmix', logo: '/ticker_logos/ohmix.webp' },
+    { id: 7, name: 'Online Taleem ul Quran', logo: '/ticker_logos/online-taleem-ul-quran.webp' },
+    { id: 8, name: 'SA', logo: '/ticker_logos/sa.webp' },
+    { id: 9, name: 'TechTrack', logo: '/ticker_logos/techtrack.webp' },
 ];
 
 const ClientsTicker: React.FC = () => {
