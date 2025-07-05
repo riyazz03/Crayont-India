@@ -156,7 +156,7 @@ export default function Footer() {
         {/* Footer Bottom */}
         <div className="footer-bottom">
           <div className="footer-bottom-content">
-            <p>&copy; 2025 Crayont India Private Limited. All rights reserved.</p>
+            <p>&copy; 2025 Crayont India. All rights reserved.</p>
             <div className="footer-bottom-links">
               <a href="/privacy-policy">Privacy Policy</a>
               <a href="/terms-of-service">Terms of Service</a>
