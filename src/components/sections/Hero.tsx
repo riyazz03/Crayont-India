@@ -381,8 +381,6 @@ const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
 
   return (
     <section ref={heroSectionRef} className="hero-section">
-      <div className="line-hero"></div>
-      <div className="is-right-line"></div>
       
       {/* Canvas Grid Background */}
       <canvas
@@ -398,8 +396,6 @@ const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
         }}
       />
       
-      <div className="blue-overlay"></div>
-      <div className="green-overlay"></div>
       
       <div className="hero-container">
         <div className="hero-content">

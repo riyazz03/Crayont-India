@@ -1,21 +1,21 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { gsap } from 'gsap';
 import '../../styles/clients-ticker.css'; // Adjust the path as necessary
 
-// Client logos data - replace with your actual logos
+// Client logos data - updated with your actual logo paths
 const clientLogos = [
-    { id: 1, name: 'Google', logo: '/logos/google.svg' },
-    { id: 2, name: 'Microsoft', logo: '/logos/microsoft.svg' },
-    { id: 3, name: 'Amazon', logo: '/logos/amazon.svg' },
-    { id: 4, name: 'Apple', logo: '/logos/apple.svg' },
-    { id: 5, name: 'Netflix', logo: '/logos/netflix.svg' },
-    { id: 6, name: 'Spotify', logo: '/logos/spotify.svg' },
-    { id: 7, name: 'Tesla', logo: '/logos/tesla.svg' },
-    { id: 8, name: 'Meta', logo: '/logos/meta.svg' },
-    { id: 9, name: 'Adobe', logo: '/logos/adobe.svg' },
-    { id: 10, name: 'Slack', logo: '/logos/slack.svg' },
+    { id: 1, name: 'Advenza', logo: '/ticker_logos/advenza.png' },
+    { id: 2, name: 'Archoeuvre', logo: '/ticker_logos/archoeuvre.png' },
+    { id: 3, name: 'Arm Ni Enterprises', logo: '/ticker_logos/arm-ni-enterprises.png' },
+    { id: 4, name: 'Himalaya Offset', logo: '/ticker_logos/himalaya-offset.png' },
+    { id: 5, name: 'Madrasa Rahmania Quasimul Uloom', logo: '/ticker_logos/madrasa.png' },
+    { id: 6, name: 'Ohmix', logo: '/ticker_logos/ohmix.png' },
+    { id: 7, name: 'Online Taleem ul Quran', logo: '/ticker_logos/online-taleem-ul-quran.png' },
+    { id: 8, name: 'SA', logo: '/ticker_logos/sa.png' },
+    { id: 9, name: 'TechTrack', logo: '/ticker_logos/techtrack.png' },
 ];
 
 const ClientsTicker: React.FC = () => {
@@ -29,16 +29,33 @@ const ClientsTicker: React.FC = () => {
         const ticker = tickerRef.current;
         const container = containerRef.current;
 
-        // Calculate the width of one set of logos
-        const logoWidth = ticker.scrollWidth / 2;
+        // Reset position to prevent initial glitch
+        gsap.set(ticker, { x: 0 });
 
-        // Create the infinite scroll animation
-        animationRef.current = gsap.timeline({ repeat: -1 });
-        animationRef.current.to(ticker, {
-            x: -logoWidth,
-            duration: 20,
-            ease: 'none',
+        // Calculate the width of one set of logos
+        const logoElements = ticker.querySelectorAll('.clients-ticker__logo');
+        const singleSetWidth = Array.from(logoElements).slice(0, clientLogos.length).reduce((total, element) => {
+            return total + element.getBoundingClientRect().width;
+        }, 0);
+
+        // Add gap calculations
+        const gap = 50; // Should match your CSS gap
+        const totalWidth = singleSetWidth + (gap * clientLogos.length);
+
+        // Create the infinite scroll animation with seamless loop
+        animationRef.current = gsap.timeline({
+            repeat: -1,
+            ease: 'none'
         });
+
+        animationRef.current.fromTo(ticker,
+            { x: 0 },
+            {
+                x: -totalWidth,
+                duration: 25, // Slightly slower for smoother animation
+                ease: 'none'
+            }
+        );
 
         // Pause/resume on hover
         const handleMouseEnter = () => {
@@ -67,10 +84,12 @@ const ClientsTicker: React.FC = () => {
 
     return (
         <section className="clients-ticker">
-            <div className="gradient-black"></div>
-            <div className="gradient-black is-bottom"></div>
             <div className="clients-ticker__container">
                 <h2 className="clients-ticker__heading">Our Trusted Clients</h2>
+
+                <p className='clients-ticker__description'>
+                    We specialize in custom website development and mobile app development, delivering high-quality digital solutions tailored to each brand's unique needs. With 24/7 customer support, a collaborative process, and a strong focus on client satisfaction, we've built lasting relationships with businesses across industries. The logos below represent some of the trusted clients who have partnered with us to bring their digital visions to life.
+                </p>
 
                 <div className="clients-ticker__ticker-container" ref={containerRef}>
                     <div className="clients-ticker__gradient clients-ticker__gradient--left"></div>
@@ -80,10 +99,14 @@ const ClientsTicker: React.FC = () => {
                         {/* First set of logos */}
                         {clientLogos.map((client) => (
                             <div key={client.id} className="clients-ticker__logo">
-                                <img
+                                <Image
                                     src={client.logo}
                                     alt={`${client.name} logo`}
+                                    width={180}
+                                    height={200}
                                     className="clients-ticker__logo-img"
+                                    style={{ objectFit: 'contain' }}
+                                    priority={false}
                                 />
                             </div>
                         ))}
@@ -91,10 +114,14 @@ const ClientsTicker: React.FC = () => {
                         {/* Duplicate set for seamless loop */}
                         {clientLogos.map((client) => (
                             <div key={`duplicate-${client.id}`} className="clients-ticker__logo">
-                                <img
+                                <Image
                                     src={client.logo}
                                     alt={`${client.name} logo`}
+                                    width={180}
+                                    height={200}
                                     className="clients-ticker__logo-img"
+                                    style={{ objectFit: 'contain' }}
+                                    priority={false}
                                 />
                             </div>
                         ))}
