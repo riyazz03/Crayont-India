@@ -21,7 +21,7 @@ const clientLogos = [
 const ClientsTicker: React.FC = () => {
     const tickerRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const animationRef = useRef<gsap.core.Timeline | null>(null);
+    const animationRef = useRef<gsap.core.Tween | null>(null);
 
     useEffect(() => {
         if (!tickerRef.current || !containerRef.current) return;
@@ -31,28 +31,6 @@ const ClientsTicker: React.FC = () => {
 
         // Wait for images to load and get accurate measurements
         const setupAnimation = () => {
-            // Get all logo elements
-            const logoElements = ticker.querySelectorAll('.clients-ticker__logo');
-            
-            // Calculate the total width of one complete set (first half of logos)
-            const firstSetLogos = Array.from(logoElements).slice(0, clientLogos.length);
-            
-            // Force a layout recalculation to get accurate measurements
-            ticker.style.display = 'flex';
-            
-            // Calculate total width including gaps
-            const logoWidth = firstSetLogos.reduce((total, element) => {
-                const rect = element.getBoundingClientRect();
-                return total + rect.width;
-            }, 0);
-            
-            // Get computed gap from CSS
-            const computedStyle = window.getComputedStyle(ticker);
-            const gap = parseInt(computedStyle.gap) || 50;
-            
-            // Total width of one set including gaps
-            const singleSetWidth = logoWidth + (gap * (clientLogos.length - 1));
-            
             // Kill any existing animation
             if (animationRef.current) {
                 animationRef.current.kill();
@@ -60,18 +38,19 @@ const ClientsTicker: React.FC = () => {
             
             // Reset position
             gsap.set(ticker, { x: 0 });
-
-            // Create the infinite scroll animation
-            animationRef.current = gsap.timeline({
+            
+            // Force a layout recalculation to get accurate measurements
+            ticker.style.display = 'flex';
+            
+            // Get the total scrollWidth (like your JS version)
+            const totalWidth = ticker.scrollWidth;
+            
+            // Create the infinite scroll animation (like your JS version)
+            animationRef.current = gsap.to(ticker, {
+                x: -totalWidth / 3, // Using the same logic as your JS version
+                duration: 30, // Same duration as your JS version
+                ease: 'none',
                 repeat: -1,
-                ease: 'none'
-            });
-
-            // Animate from 0 to exactly -singleSetWidth for seamless loop
-            animationRef.current.to(ticker, {
-                x: -singleSetWidth,
-                duration: 20, // Adjust speed as needed
-                ease: 'none'
             });
         };
 
@@ -141,9 +120,24 @@ const ClientsTicker: React.FC = () => {
                             </div>
                         ))}
 
-                        {/* Duplicate set for seamless loop */}
+                        {/* Second set for seamless loop */}
                         {clientLogos.map((client) => (
                             <div key={`duplicate-${client.id}`} className="clients-ticker__logo">
+                                <Image
+                                    src={client.logo}
+                                    alt={`${client.name} logo`}
+                                    width={180}
+                                    height={200}
+                                    className="clients-ticker__logo-img"
+                                    style={{ objectFit: 'contain' }}
+                                    priority={false}
+                                />
+                            </div>
+                        ))}
+
+                        {/* Third set for seamless loop */}
+                        {clientLogos.map((client) => (
+                            <div key={`triple-${client.id}`} className="clients-ticker__logo">
                                 <Image
                                     src={client.logo}
                                     alt={`${client.name} logo`}

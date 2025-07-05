@@ -29,7 +29,15 @@
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+.clients-ticker__gradient--left {
+  left: 0;
+  background: linear-gradient(to right, var(--brand-color-1), transparent);
+}
 
+.clients-ticker__gradient--right {
+  right: 0;
+  background: linear-gradient(to left, var(--brand-color-1), transparent);
+}
 .clients-ticker__ticker-container {
   position: relative;
   overflow: hidden;
@@ -75,8 +83,9 @@
 
 .clients-ticker__gradient {
   position: absolute;
-  top: 0;
-  height: 100%;
+  top: auto;
+  bottom: 57px;
+  height: 103px;
   width: 150px;
   z-index: 1;
   pointer-events: none;
